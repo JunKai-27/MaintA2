@@ -7,8 +7,13 @@ public class Order {
     private final double orderAmount;
     private final PaymentMethod paymentMethod;
 
-    // Re-engineered - New variables used to calculate the tiered-discount. Defined here to avoid Magic Number 
-
+    // Re-engineered - New variables are updated to be used to calculate the tiered-discount. Defined here to avoid Magic Number 
+    private static final double TIER_1_MIN_AMOUNT = 100.0;
+    private static final double TIER_1_MAX_AMOUNT = 200.0;
+    private static final double TIER_2_MAX_AMOUNT = 500.0;
+    private static final double TIER_1_DISCOUNT_RATE = 0.05;
+    private static final double TIER_2_DISCOUNT_RATE = 0.10;
+    private static final double TIER_3_DISCOUNT_RATE = 0.15;
     
     public Order(String orderId, Customer customer, double orderAmount, PaymentMethod paymentMethod) {
         //Validate b4 object creation (Here we separate the validation of each field out to achieve better SRP)
