@@ -82,7 +82,7 @@ public class Order {
     	
     }
     
-    // Re-engineered - New logic to calculate the discount amount 
+    // Re-engineered - New logic to calculate the total discount amount 
     private double calculateDiscountedAmount() { //Private cuz it will only be called by calculateFinalAmount()
         double discountRate = getDiscountRate(); //get the discount rate based on the order amount tier
 
