@@ -25,6 +25,13 @@ public class CardPaymentAdapter implements PaymentMethod {
     private final String cardNumber;
     private final PaymentLibrary paymentLibrary;
 
+    // Caches the result of the FIRST charge. Order.calculateFinalAmount() is not
+    // guaranteed to be called only once per order (e.g. LoggingOrderProcessor calls
+    // it a second time to build the log line), so without this cache the card would
+    // be charged again on every extra call. Caching keeps applyFee() idempotent from
+    // the caller's point of view while still hitting PaymentLibrary exactly once.
+    private String transactionId;
+
     public CardPaymentAdapter(String cardNumber) {
         if (cardNumber == null || cardNumber.trim().isEmpty()) {
             throw new IllegalArgumentException("Card number cannot be empty");
@@ -35,8 +42,10 @@ public class CardPaymentAdapter implements PaymentMethod {
 
     @Override
     public double applyFee(double amount) {
-        String transactionId = paymentLibrary.processCardTransaction(cardNumber, amount);
-        System.out.println("Card payment processed. Transaction ID: " + transactionId);
+        if (transactionId == null) {
+            transactionId = paymentLibrary.processCardTransaction(cardNumber, amount);
+            System.out.println("Card payment processed. Transaction ID: " + transactionId);
+        }
         // No additional fee is applied; the third-party library now owns
         // card payment processing, replacing the previous $5 flat fee.
         return amount;
@@ -46,5 +55,8 @@ public class CardPaymentAdapter implements PaymentMethod {
     public String getCardNumber() {
         return cardNumber;
     }
-}
+
+    public String getTransactionId() {
+        return transactionId;
+    }
 }
