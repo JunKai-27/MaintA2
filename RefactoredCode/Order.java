@@ -81,16 +81,7 @@ public class Order {
     	return discountRate;
     	
     }
-    
-    // Re-engineered - New logic to calculate the total discount amount 
-    private double calculateDiscountedAmount() { //Private cuz it will only be called by calculateFinalAmount()
-        double discountRate = getDiscountRate(); //get the discount rate based on the order amount tier
 
-        double discountedAmount = orderAmount - (orderAmount * discountRate);
-        
-        return Math.round(discountedAmount * 100.0) / 100.0; //to keep the discounted amount in 2 decimal places cuz it is money
-    }
-        
     public double calculateFinalAmount() {
         double discountedAmount = calculateDiscountedAmount();
         double finalAmount = paymentMethod.applyFee(discountedAmount);
