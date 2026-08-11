@@ -11,9 +11,9 @@ public class Order {
     private static final double TIER_1_MIN_AMOUNT = 100.0;
     private static final double TIER_1_MAX_AMOUNT = 200.0;
     private static final double TIER_2_MAX_AMOUNT = 500.0;
-    private static final double TIER_1_DISCOUNT_RATE = 0.05;
-    private static final double TIER_2_DISCOUNT_RATE = 0.10;
-    private static final double TIER_3_DISCOUNT_RATE = 0.15;
+    private static final double TIER_1_DISCOUNT_RATE = 0.10;
+    private static final double TIER_2_DISCOUNT_RATE = 0.15;
+    private static final double TIER_3_DISCOUNT_RATE = 0.20;
     
     public Order(String orderId, Customer customer, double orderAmount, PaymentMethod paymentMethod) {
         //Validate b4 object creation (Here we separate the validation of each field out to achieve better SRP)
