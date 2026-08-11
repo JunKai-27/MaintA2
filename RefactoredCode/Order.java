@@ -7,7 +7,7 @@ public class Order {
     private final double orderAmount;
     private final PaymentMethod paymentMethod;
 
-    // Re-engineered - New variables used to calculate the tiered-discount. Defined here to avoid Magic Number 
+    // Re-engineered - New variables are updated to be used to calculate the tiered-discount. Defined here to avoid Magic Number 
     private static final double TIER_1_MIN_AMOUNT = 100.0;
     private static final double TIER_1_MAX_AMOUNT = 200.0;
     private static final double TIER_2_MAX_AMOUNT = 500.0;
